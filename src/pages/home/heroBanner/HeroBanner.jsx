@@ -12,18 +12,19 @@ const HeroBanner = () => {
     const [query,setQuery] = useState("")
     const navigate = useNavigate()
     const url = useSelector((state) => state.home.url)
-    console.log(url.backdrop);
+    // console.log(url.backdrop);
 
     const {data,loading} = useFetch("/movie/popular")
 
     useEffect(() => {
-        const bg = url.backdrop  + data?.results?.[Math.floor(Math.random() * 20)].backdrop_path
+        const bg = "https://image.tmdb.org/t/p/original" + data?.results?.[Math.floor(Math.random() * 20)].backdrop_path
         setBackgorund(bg)
     },[data])
 
-    console.log(backgorund);
+    // console.log(backgorund);
+
     const searchQueryHandler = (e) => {
-        if(e.key === "Enter" && query.length > 0){
+        if(query.length > 0){
             navigate(`/search/${query}`)
         }
 
@@ -46,9 +47,10 @@ const HeroBanner = () => {
                         type="text" 
                         placeholder='Search for a Movie or a TV Show.'
                         onChange={(e) => setQuery(e.target.value)}
-                        onKeyUp={searchQueryHandler}
+                        // onKeyUp={searchQueryHandler}
+                       
                         />
-                    <button>Search</button>
+                    <button onClick={searchQueryHandler}>Search</button>
                 </div>
             </div>
         </ContentWrapper>
